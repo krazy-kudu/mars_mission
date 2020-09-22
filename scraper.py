@@ -9,23 +9,99 @@ def init_browser():
     return Browser("chrome", **executable_path, headless=False)
 
 def scrape_info():
+    # browser = init_browser()
+
+    # # Visit visitcostarica.herokuapp.com
+    # news_url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
+    # browser.visit(news_url)
+
+    # time.sleep(3)
+    # all_text = []
+
+    # # Scrape page into Soup
+    # html = browser.html
+    # soup = bs(html, "html.parser")
+    # title = soup.title.text
+    # print(title)
+
     browser = init_browser()
+    hemisphere_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
+    browser.visit(hemisphere_url)
+    time.sleep(3)
 
-    # Visit visitcostarica.herokuapp.com
-    news_url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
-    browser.visit(news_url)
-
-    time.sleep(1)
-
-    # Scrape page into Soup
     html = browser.html
-    soup = bs(html, "html.parser")
+    soup = bs(html, 'html.parser')
+    #print(soup.prettify())
+                
+    my_xpath = '/html/body/div[1]/div[1]/div[2]/section/div/div[2]'
+    hemi_divs = browser.find_by_xpath(my_xpath)
 
-    article_title = soup.find('div', class_='content_title').find('a').text
-    article_head = soup.find('div', class_='rollover_description_inner').text
-    print (article_title)
-    print (article_head)
+    hemi_soup = bs(hemi_divs.html, 'html.parser')
 
+    print(hemi_soup.prettify)
+    print(len(hemi_soup))
+    link_list = []
+    
+    for link in range(len(hemi_soup)):
+       
+        img1_xpath = f'/html/body/div[1]/div[1]/div[2]/section/div/div[2]/div[{link+1}]/a'
+        print(img1_xpath)
+        
+        link_found = browser.links.find_by_partial_href('search/map/Mars')
+        link_url = link_found.
+        # img_url = browser.find_by_xpath(img1_xpath)
+        print(link_url)
 
-    return article_head
+        link = {
+            'img_url' : link_url
+        }
 
+        link_list.append(link)
+
+    
+
+    print(link_list)
+    return link_list
+    #print(soup.prettify())
+    
+    # for thing in soup:
+    #     # article_title = soup.find('div', class_='content_title').find('a').text
+    #     # article_head = soup.find('div', class_='rollover_description_inner').text
+
+    #     article_title = browser.find_by_tag('div', class_='content_title').find_by_tag('a').text
+    #     article_head = browser.find_by_tag('div', class_='rollover_description_inner').text
+    #     # title_text = browser.find_by_tag(title_soup).text 
+    #     # head_text = browser.find_by_tag(head_soup).text
+        
+    #     article_text = {
+    #         # 'title' : article_title,
+    #         # 'head' : article_head
+    #         'title' : title_text,
+    #         'head' : head_text
+    #         }
+    
+    #     all_text.append(article_text)
+    
+    # print(all_text)
+    # return all_text
+    
+   
+    
+
+    featured_img_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
+    browser.visit(featured_img_url)
+    time.sleep(3)
+
+    img_html = requests.get(featured_img_url)
+    img_soup = bs(img_html.text, 'lxml')
+    print(img_soup.prettify())
+
+    base_url = 'https://www.jpl.nasa.gov'
+    relative_image_path = img_soup.find_all('img')[5]['src']
+    featured_url = base_url + relative_image_path
+    
+    
+    return featured_url
+mars_data = scrape_info()
+
+print(mars_data)
