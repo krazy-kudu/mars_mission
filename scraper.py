@@ -79,11 +79,11 @@ def scrape_info():
     for title in h3:
         title.append(title.text)
     img_url = []
-    #Loop through titles list click each title link.
+   
     for link in title:
-        #Click Title Link
+        
         browser.click_link_by_partial_text(link)
-        #Scrape Page into Soup
+       
         image_soup = bs(browser.html, 'html.parser')
         
         div = image_soup.find_all('div', class_='downloads')
@@ -96,7 +96,7 @@ def scrape_info():
         browser.visit(mars_hemispheres_url)
         
         hemisphere_image_urls = dict(zip(title, img_url))
-    print('Found Mars Hemispheres')
+   
     mars_data['hemispheres'] = hemisphere_image_urls
 
     
@@ -211,5 +211,5 @@ def scrape_info():
     
     return mars_data
     browser.quit()
-# mars_data = scrape_info()
-# print(mars_data)
+mars_data = scrape_info()
+print(mars_data)
