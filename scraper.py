@@ -76,8 +76,8 @@ def scrape_info():
     
     h3 = hemispheres_soup.find_all('h3')
     title = []
-    for x in h3:
-        title.append(x.text)
+    for title in h3:
+        title.append(title.text)
     img_url = []
     #Loop through titles list click each title link.
     for link in title:
