@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def init_browser():
-    executable_path = {'executable_path' : 'static/chromedriver.exe'}
+    executable_path = {'executable_path' : 'static/chromedriver'}
     return Browser('chrome', **executable_path, headless=False)
 
 
@@ -23,7 +23,7 @@ def scrape_info():
     news_soup = bs(news_html, 'html.parser')
 
     all_article = news_soup.find_all('li', 'slide')
-    top_title = all_article[0].find('a').text
+    top_title = all_article[0].find('div', class_='content_title').text
     top_header = all_article[0].find('div', class_='rollover_description_inner').text
 
     mars_data['top_title'] = top_title
