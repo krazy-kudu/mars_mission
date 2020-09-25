@@ -1,46 +1,89 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 
-            <button type="button" class="btn btn-success" href="/scrape" role="button">Get Data</button> > Button
-            </button>
+<head>
+    <meta charset="utf-8">
+    <title>Mission to Mars</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
+            <h1>Mission to Mars</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
         </div>
         <div class="container-fluid">
-            <h1>Top Article:</h1>
-            <h4>{{spacey.top_title}}</h2>
-                <p>{{spacey.top_header}</p>
+            <h1>Latest Mars News:</h1>
+            <h4>{{mars_data.top_title}}</h2>
+                <p>{{mars_data.top_header}}</p>
+        </div>
+    </div>
+    <div class="row">
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <img alt="Bootstrap Image Preview" src="{{spacey.featured_img}}">
-                    </div>
-                    <div class="col-md-6">
-                    </div>
-                    {% if spacey %}
+        <div class="col-lg-6">
 
 
-                    <table class='table table-dark'>
-                        <thead class="thead-light"></thead>
-                        </tr>
-                        {% for key, item in spacey %}
+            <div class="container-fluid">
+
+
+                <h2>Featured Mars Image</h2>
+                <img src="{{mars_data.featured_img}}" alt="" style="width: 50rem;">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="row">
+                <div class="container-fluid">
+
+                    <h1>Mars Facts</h1>
+
+                    <table class='table table-hover'>
                         <tr>
-                            <th> {{ item. }} </th>
-                            <td> {{ item.total_cases }} </td>
-                            <td> {{ item.new_cases }} </td>
+                            <th></th>
+                            <th>Description</th>
+                        </tr>
+                        {% for key, item in mars_data.mars_table.items() %}
+                        <tr>
+                            <th>{{key}}</th>
+                            <th>{{item}}</th>
                         </tr>
                         {% endfor %}
                     </table>
 
 
                 </div>
-
-                <table class="table">
+            </div>
+        </div>
+        <div class="col-lg-2">
 
         </div>
+    </div>
+    </div>
+    <!-- <div class="container-fluid">
+
+
+        <h1 class="text-left">Mars Hemispheres</h1>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <img alt="Bootstrap Image Preview" src="">
+
+
+
+
+
+        {% for key, item in mars.hemispheres.items() %}
+        <div class="col-lg-4">
+            <div class="card float-center border-warning" style="width: 35rem;">
+                <img src="{{item}}" class="card-img-top">
+                <h5 class="card-title">{{key}}</h5>
+            </div>
         </div>
+        <div class="col-lg-1">
+
+        </div> -->
+    {% endfor %}
+
     </div>
-    {% endif %}
+</body>
+
+</html>
