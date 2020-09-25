@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+
+            <button type="button" class="btn btn-success" href="/scrape" role="button">Get Data</button> > Button
+            </button>
+        </div>
+        <div class="container-fluid">
+            <h1>Top Article:</h1>
+            <h4>{{spacey.top_title}}</h2>
+                <p>{{spacey.top_header}</p>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <img alt="Bootstrap Image Preview" src="{{spacey.featured_img}}">
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                    {% if spacey %}
+
+
+                    <table class='table table-dark'>
+                        <thead class="thead-light"></thead>
+                        </tr>
+                        {% for key, item in spacey %}
+                        <tr>
+                            <th> {{ item. }} </th>
+                            <td> {{ item.total_cases }} </td>
+                            <td> {{ item.new_cases }} </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+
+                </div>
+
+                <table class="table">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <img alt="Bootstrap Image Preview" src="">
+        </div>
+    </div>
+    {% endif %}

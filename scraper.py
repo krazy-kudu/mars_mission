@@ -4,13 +4,14 @@ import time
 import pandas as pd
 
 
-
-executable_path = {'executable_path' : 'static/chromedriver.exe'}
-browser = Browser('chrome', **executable_path, headless=False)
+def init_browser():
+    executable_path = {'executable_path' : 'static/chromedriver.exe'}
+    return Browser('chrome', **executable_path, headless=False)
 
 
 def scrape_info():
-    
+    browser = init_browser()
+
     mars_data = {}
 
     news_url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
@@ -28,9 +29,9 @@ def scrape_info():
     mars_data['top_title'] = top_title
     mars_data['top_header'] = top_header
     
-
+    browser.quit()
  
-
+    print(mars_data)
 
     
     base_featured_url = 'https://www.jpl.nasa.gov'
@@ -46,7 +47,8 @@ def scrape_info():
     
     mars_data['featured_img'] = featured_img_url
     
-
+    browser.quit()
+    print(mars_data)
 
 
  
@@ -64,7 +66,8 @@ def scrape_info():
     mars_data['mars_table'] = mars_table_dict
 
 
-
+    browser.quit()
+    print(mars_data)
 
     mars_hemispheres_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     
@@ -97,9 +100,10 @@ def scrape_info():
         
         hemisphere_image_urls = dict(zip(title, img_url))
    
-    mars_data['hemispheres'] = hemisphere_image_urls
+        mars_data['hemispheres'] = hemisphere_image_urls
 
-    
+    browser.quit()
+    print(mars_data)
     # hemisphere_base_url = 'https://astrogeology.usgs.gov'
     # page_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     
@@ -210,6 +214,6 @@ def scrape_info():
 
     
     return mars_data
-    browser.quit()
-mars_data = scrape_info()
-print(mars_data)
+    
+# mars_data = scrape_info()
+# print(mars_data)
