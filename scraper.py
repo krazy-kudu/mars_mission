@@ -215,5 +215,5 @@ def scrape_info():
     print(mars_data)
     return mars_data
     
-mars_data = scrape_info()
-print(mars_data)
+# mars_data = scrape_info()
+# print(mars_data)
