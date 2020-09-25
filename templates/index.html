@@ -17,20 +17,28 @@
             <p>people are dying. the world is on fire.</p>
             <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Data!</a></p>
         </div>
+
+
+        {% if spacey %}
+        <p>Most Recent scrape:</p>
+        <script>
+            var current_time = new Date();
+            document.write(current_time.toLocaleString());
+            document.write("<br>");
+        </script>
         <div class="row">
             <div class="col-md-12">
                 <div class="container-fluid">
-                    {% if spacey %}
 
                     <h1>Top Article:</h1>
                     <h4>{{spacey.top_title}}</h2>
                         <p>{{spacey.top_header}}</p>
                 </div>
-                {% endif %}
-            </div>
+
+                <!-- </div>
             <div class="row">
                 <div class="col-md-6">
-                    <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    <img alt="{{spacey.featured_img}}" />
                 </div>
                 <div class="col-md-6">
                     <table class="table">
@@ -124,6 +132,7 @@
                         </tbody>
                     </table>
                 </div>
+            </div> -->
             </div>
-        </div>
+            {% endif %}
 </body>

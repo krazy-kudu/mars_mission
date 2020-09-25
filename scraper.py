@@ -17,7 +17,7 @@ def scrape_info():
     news_url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
     browser.visit(news_url)
 
-    time.sleep(3)
+    time.sleep(10)
     
     news_html = browser.html
     news_soup = bs(news_html, 'html.parser')
@@ -29,7 +29,7 @@ def scrape_info():
     mars_data['top_title'] = top_title
     mars_data['top_header'] = top_header
     
-    browser.quit()
+    
  
     print(mars_data)
 
@@ -37,7 +37,7 @@ def scrape_info():
     base_featured_url = 'https://www.jpl.nasa.gov'
     img_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     browser.visit(img_url)
-    time.sleep(3)
+    time.sleep(10)
 
     featured_html = browser.html
     featured_img_soup = bs(featured_html, 'html.parser')
@@ -47,7 +47,7 @@ def scrape_info():
     
     mars_data['featured_img'] = featured_img_url
     
-    browser.quit()
+    
     print(mars_data)
 
 
@@ -66,7 +66,7 @@ def scrape_info():
     mars_data['mars_table'] = mars_table_dict
 
 
-    browser.quit()
+    
     print(mars_data)
 
     mars_hemispheres_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
@@ -102,7 +102,7 @@ def scrape_info():
    
         mars_data['hemispheres'] = hemisphere_image_urls
 
-    browser.quit()
+    
     print(mars_data)
     # hemisphere_base_url = 'https://astrogeology.usgs.gov'
     # page_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
@@ -211,9 +211,9 @@ def scrape_info():
     # # return all_text
 
    
-
-    
+    browser.quit()
+    print(mars_data)
     return mars_data
     
-# mars_data = scrape_info()
-# print(mars_data)
+mars_data = scrape_info()
+print(mars_data)
