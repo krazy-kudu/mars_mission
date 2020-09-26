@@ -69,42 +69,37 @@ def scrape_info():
     
     
 
+    hemisphere_root_url = 'https://astrogeology.usgs.gov'
     mars_hemispheres_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     
     browser.visit(mars_hemispheres_url)
    
     hemispheres_soup = bs(browser.html, 'html.parser')
-    #print(hemispheres_soup.prettify())
-    
     
     h3 = hemispheres_soup.find_all('h3')
-    hemi = []
-
-    for hemi in h3:
-        hemi.append(hemi.text)
-
-    img_urls = []
-   
-    for link in hemi:
+    title = []
+    for x in h3:
+        title.append(x.text)
+    img_url = []
+    
+    for link in title:
         
         browser.click_link_by_partial_text(link)
-       
-        img_soup = bs(browser.html, 'html.parser')
         
-        div = img_soup.find_all('div', class_='downloads')
+        image_soup = bs(browser.html, 'html.parser')
+       
+        div = image_soup.find_all('div', class_='downloads')
         li = div[0].find_all('li')[0]
         a = li.find_all('a')
-        full_img = a[0]['href']
+        full_size_img = a[0]['href']
         
-        img_urls.append(full_img)
-        
+        img_url.append(full_size_img)
+       
         browser.visit(mars_hemispheres_url)
-        
-        hemi_img_urls = dict(zip(hemi, img_urls))
-   
-        mars_data['hemispheres'] = hemi_img_urls
-  
-    # print(mars_data['hemispheres'])
+       
+        hemisphere_dict = dict(zip(title, img_url))
+    
+    mars_data['hemispheres'] = hemisphere_dict
     browser.quit()
     
     return mars_data
